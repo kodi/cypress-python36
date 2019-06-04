@@ -18,7 +18,7 @@ make > /dev/null 2>&1 && \
 make install > /dev/null 2>&1 && \
 rm -rf ${BUILDDIR} 
 
-RUN apt-get install poppler-utils ghostscript imagemagick
+RUN apt-get install -y poppler-utils ghostscript imagemagick
 
 #image magic
 RUN mkdir -p /etc/ImageMagick-6
@@ -26,3 +26,5 @@ COPY data/policy.xml /etc/ImageMagick-6/
 
 ## add custom .bashrc
 COPY data/.bashrc /root/.bashrc
+
+ENTRYPOINT ["/usr/bin/env"]
