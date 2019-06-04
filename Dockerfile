@@ -1,4 +1,4 @@
-FROM cypress/browsers:node11.13.0-chrome73
+FROM cypress/included:3.3.1
 
 USER root
 
@@ -17,6 +17,12 @@ cd Python-${PYTHON_VER} && \
 make > /dev/null 2>&1 && \
 make install > /dev/null 2>&1 && \
 rm -rf ${BUILDDIR} 
+
+RUN apt-get install poppler-utils ghostscript imagemagick
+
+#image magic
+RUN mkdir -p /etc/ImageMagick-6
+COPY data/policy.xml /etc/ImageMagick-6/
 
 ## add custom .bashrc
 COPY data/.bashrc /root/.bashrc
